@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vansh Mahajan · AI/ML & AI Security</title>
+  <meta name="description" content="Vansh Mahajan — CS undergraduate building LLM apps, RAG systems and secure AI. Projects, experience and contact.">
+  <meta property="og:title" content="Vansh Mahajan · AI/ML & AI Security">
+  <meta property="og:description" content="Building LLM apps, RAG systems and secure AI with Python.">
+  <meta name="theme-color" content="#000000">
+  <script>
+    // apply the saved theme before first paint (no flash)
+    try { const t = localStorage.getItem("theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%2307091a'/><text x='32' y='43' font-family='monospace' font-size='30' font-weight='700' text-anchor='middle' fill='%238f7bff'>V</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+
+  <!-- ============ BOOT SEQUENCE ============ -->
+  <div class="boot" id="boot" aria-hidden="true">
+    <div class="boot__inner">
+      <pre class="boot__log" id="bootLog"></pre>
+      <div class="boot__bar"><span id="bootBar"></span></div>
+      <button class="boot__skip" id="bootSkip">skip ↵</button>
+    </div>
+  </div>
+  <div class="curtain" id="curtain"><span></span><span></span><span></span><span></span></div>
+
+  <!-- ============ GLOBAL CHROME ============ -->
+  <canvas id="aurora" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><div class="cursor__dot"></div><div class="cursor__ring"><span class="cursor__label"></span></div></div>
+  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__logo" data-magnetic>VANSH<span>.SYS</span></a>
+    <nav class="nav__links">
+      <a href="#about" data-scramble>about</a>
+      <a href="#work" data-scramble>work</a>
+      <a href="#projects" data-scramble>projects</a>
+      <a href="#terminal" data-scramble>terminal</a>
+      <a href="#contact" data-scramble>contact</a>
+    </nav>
+    <div class="nav__status"><i></i><span>open to opportunities</span></div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" data-cursor="theme">
+      <svg class="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></svg>
+      <svg class="ic-moon" viewBox="0 0 24 24"><path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11z"/></svg>
+    </button>
+  </header>
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__left">
+        <p class="eyebrow reveal-up"><span class="dot"></span> CS @ IILM University · Ex-AI Intern @ LeewayHertz</p>
+        <h1 class="hero__name">
+          <span class="line"><span class="word" data-decode="Vansh">Vansh</span></span>
+          <span class="line"><span class="word word--outline" data-decode="Mahajan">Mahajan</span></span>
+        </h1>
+        <p class="hero__role">I build <span class="rotator" id="rotator">LLM apps</span><span class="caret">_</span></p>
+        <p class="hero__lede reveal-up">Second-year Computer Science student working where <em>AI/ML</em> meets <em>cybersecurity</em> — building LLM-powered systems and figuring out how to make them secure.</p>
+        <div class="hero__cta reveal-up">
+          <a href="#projects" class="btn btn--primary" data-magnetic data-cursor="view"><span>See my work</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#terminal" class="btn btn--ghost" data-magnetic data-cursor="type"><span>Open terminal</span><code>&gt;_</code></a>
+        </div>
+      </div>
+      <div class="hero__right">
+        <div class="core" data-tilt aria-hidden="true">
+          <div class="core__ring"></div>
+          <div class="core__blob"><canvas id="globe"></canvas></div>
+          <div class="core__chip chip-a">🧠 LLMs &amp; RAG</div>
+          <div class="core__chip chip-b">🛡️ AI Security</div>
+          <div class="core__chip chip-c">⚡ Python</div>
+          <svg class="core__orbit" viewBox="0 0 400 400"><circle cx="200" cy="200" r="190"/></svg>
+        </div>
+      </div>
+      <a href="#about" class="hero__scroll" aria-label="Scroll down"><span>scroll</span><i></i></a>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <section class="marquee" aria-label="Skills">
+      <div class="marquee__row" data-dir="1">
+        <div class="marquee__track">
+          <span>Python</span><b>✦</b><span>Large Language Models</span><b>✦</b><span>RAG</span><b>✦</b><span>AI Agents</span><b>✦</b><span>Vector Search</span><b>✦</b><span>Local LLMs</span><b>✦</b><span>Prompt Injection</span><b>✦</b><span>Computer Vision</span><b>✦</b>
+        </div>
+      </div>
+      <div class="marquee__row marquee__row--alt" data-dir="-1">
+        <div class="marquee__track">
+          <span>Next.js</span><b>◆</b><span>TypeScript</span><b>◆</b><span>PostgreSQL + pgvector</span><b>◆</b><span>Prisma</span><b>◆</b><span>FastAPI</span><b>◆</b><span>SwiftUI</span><b>◆</b><span>Vercel</span><b>◆</b><span>QA Testing</span><b>◆</b>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about">
+      <p class="section-tag">[01] — about</p>
+      <p class="about__statement" id="statement">I like taking the newest ideas in AI and asking two questions: how do I build something useful with this, and how would someone break it? I've built AI agents on an enterprise generative-AI platform, shipped a RAG app over 10,600 passages, and written a vulnerability scanner that runs entirely on local LLMs.</p>
+      <div class="stats">
+        <div class="stat"><span class="stat__num" data-count="6">0</span><span class="stat__plus">+</span><p>projects shipped</p></div>
+        <div class="stat"><span class="stat__num" data-count="10600">0</span><span class="stat__plus">+</span><p>passages in SARTHI's knowledge base</p></div>
+        <div class="stat"><span class="stat__num" data-count="2">0</span><p>certifications in Python</p></div>
+        <div class="stat"><span class="stat__num" data-count="1">0</span><p>AI internship, enterprise GenAI</p></div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="work" id="work">
+      <p class="section-tag">[02] — experience</p>
+      <h2 class="section-title"><span class="split">Where I've</span> <em class="split">shipped.</em></h2>
+      <div class="timeline">
+        <svg class="timeline__line" viewBox="0 0 4 1000" preserveAspectRatio="none" aria-hidden="true"><path id="tlPath" d="M2 0 V1000"/></svg>
+        <article class="tl-item">
+          <div class="tl-item__node"></div>
+          <div class="tl-item__date">Jun – Jul 2026</div>
+          <div class="tl-card" data-tilt>
+            <h3>AI Intern <span>@ LeewayHertz</span></h3>
+            <p class="tl-card__where">Greater Delhi Area</p>
+            <ul>
+              <li>Built multiple AI agents on <b>ZBrain</b>, LeewayHertz's enterprise generative-AI platform.</li>
+              <li>QA-tested new platform features, catching issues before release.</li>
+              <li>Used Python for AI development, experimentation and testing.</li>
+              <li>Learned how LLM systems behave end to end — from agent design to real-world use.</li>
+            </ul>
+            <div class="chips"><span>AI Agents</span><span>LLMs</span><span>QA</span><span>Python</span></div>
+          </div>
+        </article>
+        <article class="tl-item">
+          <div class="tl-item__node"></div>
+          <div class="tl-item__date">2026 · ongoing</div>
+          <div class="tl-card" data-tilt>
+            <h3>EachSwipe <span>· AI video pipeline</span></h3>
+            <p class="tl-card__where">Short AI-generated video lessons, now in iPhone beta</p>
+            <ul>
+              <li>Worked on the pipeline that turns topics into illustrated, narrated video lessons.</li>
+              <li>Image generation, automated frame review and moving rendering to the cloud to cut cost per video.</li>
+              <li>Fixes across the FastAPI backend and the SwiftUI iOS app.</li>
+            </ul>
+            <div class="chips"><span>GenAI</span><span>FastAPI</span><span>SwiftUI</span><span>Cost optimisation</span></div>
+          </div>
+        </article>
+        <article class="tl-item">
+          <div class="tl-item__node"></div>
+          <div class="tl-item__date">Aug 2025 – 2029</div>
+          <div class="tl-card" data-tilt>
+            <h3>B.Tech, Computer Science <span>@ IILM University</span></h3>
+            <p class="tl-card__where">Gurugram</p>
+            <ul>
+              <li>Focus on Python, data structures &amp; algorithms, LLM systems and AI security.</li>
+            </ul>
+            <div class="chips"><span>DSA</span><span>Python</span><span>CS Core</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS (horizontal) ============ -->
+    <section class="projects" id="projects">
+      <div class="projects__pin">
+        <div class="projects__head">
+          <p class="section-tag">[03] — selected projects</p>
+          <h2 class="section-title"><span class="split">Things I've</span> <em class="split">built.</em></h2>
+          <p class="projects__hint">drag · scroll · explore →</p>
+        </div>
+        <div class="projects__track" id="track">
+
+          <article class="pcard" data-tilt style="--a:#8f7bff;--b:#36e0d0">
+            <canvas class="pcard__art" data-art="rag"></canvas>
+            <div class="pcard__body">
+              <span class="pcard__idx">01</span>
+              <h3>SARTHI</h3>
+              <p>A RAG chat app that answers life questions from an 18-volume Bhagavad Gita knowledge base (~10,600 passages), with source citations.</p>
+              <div class="chips"><span>Next.js</span><span>TypeScript</span><span>pgvector</span><span>OpenAI</span></div>
+              <div class="pcard__links"><a href="https://sarthi-sandy.vercel.app/chat" target="_blank" rel="noopener" data-cursor="open">Live demo ↗</a></div>
+            </div>
+          </article>
+
+          <article class="pcard" data-tilt style="--a:#f0a03c;--b:#ff5e7e">
+            <canvas class="pcard__art" data-art="scan"></canvas>
+            <div class="pcard__body">
+              <span class="pcard__idx">02</span>
+              <h3>AI Security Scanner</h3>
+              <p>Analyses GitHub repositories and API endpoints for potential vulnerabilities — running entirely on locally hosted LLMs, so code never leaves the machine.</p>
+              <div class="chips"><span>Python</span><span>Local LLMs</span><span>AppSec</span></div>
+              <div class="pcard__links"><span class="muted">Private build</span></div>
+            </div>
+          </article>
+
+          <article class="pcard" data-tilt style="--a:#36e0d0;--b:#8f7bff">
+            <canvas class="pcard__art" data-art="swipe"></canvas>
+            <div class="pcard__body">
+              <span class="pcard__idx">03</span>
+              <h3>EachSwipe</h3>
+              <p>Reels, but every swipe is a short AI-generated lesson. I worked on the AI video pipeline behind it. Now in iPhone beta.</p>
+              <div class="chips"><span>GenAI</span><span>LLMs</span><span>FastAPI</span><span>SwiftUI</span></div>
+              <div class="pcard__links"><a href="https://testflight.apple.com/join/acPB4Sex" target="_blank" rel="noopener" data-cursor="open">Join beta ↗</a></div>
+            </div>
+          </article>
+
+          <article class="pcard" data-tilt style="--a:#ff5e7e;--b:#f0a03c">
+            <canvas class="pcard__art" data-art="hand"></canvas>
+            <div class="pcard__body">
+              <span class="pcard__idx">04</span>
+              <h3>GestureQuest</h3>
+              <p>A task manager you control with hand gestures through the webcam — 8 gestures via MediaPipe, XP, streaks and achievements, all processed locally.</p>
+              <div class="chips"><span>JavaScript</span><span>MediaPipe</span><span>Chart.js</span></div>
+              <div class="pcard__links"><a href="https://questgesture.netlify.app/" target="_blank" rel="noopener" data-cursor="open">Live demo ↗</a><a href="https://github.com/vansh-mahajan1/hand-gesture-quest-tracker" target="_blank" rel="noopener" data-cursor="code">Code ↗</a></div>
+            </div>
+          </article>
+
+          <article class="pcard" data-tilt style="--a:#8f7bff;--b:#f0a03c">
+            <canvas class="pcard__art" data-art="shield"></canvas>
+            <div class="pcard__body">
+              <span class="pcard__idx">05</span>
+              <h3>CyberGuard</h3>
+              <p>A Python cybersecurity toolkit (CS50P final project): password strength checker, suspicious URL analyser and phishing message checker.</p>
+              <div class="chips"><span>Python</span><span>Security</span><span>CLI</span></div>
+              <div class="pcard__links"><a href="https://github.com/vansh-mahajan1/cyberguard" target="_blank" rel="noopener" data-cursor="code">Code ↗</a><a href="https://youtu.be/SfmTRtEgdhU" target="_blank" rel="noopener" data-cursor="play">Video ↗</a></div>
+            </div>
+          </article>
+
+          <article class="pcard" data-tilt style="--a:#36e0d0;--b:#f0a03c">
+            <canvas class="pcard__art" data-art="phish"></canvas>
+            <div class="pcard__body">
+              <span class="pcard__idx">06</span>
+              <h3>Phishing URL Detector</h3>
+              <p>A rule-based phishing URL detector in Python that scores links on the signals attackers rely on.</p>
+              <div class="chips"><span>Python</span><span>Security</span><span>Vercel</span></div>
+              <div class="pcard__links"><a href="https://phishing-url-detector-zeta-lake.vercel.app" target="_blank" rel="noopener" data-cursor="open">Live ↗</a><a href="https://github.com/vansh-mahajan1/phishing-url-detector" target="_blank" rel="noopener" data-cursor="code">Code ↗</a></div>
+            </div>
+          </article>
+
+          <article class="pcard pcard--more">
+            <div class="pcard__body">
+              <h3>More on GitHub</h3>
+              <p>DSA practice, a CLI study logger, experiments and snippets.</p>
+              <a href="https://github.com/vansh-mahajan1" target="_blank" rel="noopener" class="btn btn--primary" data-magnetic data-cursor="code"><span>github.com/vansh-mahajan1</span></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ORBIT ============ -->
+    <section class="skills" id="skills">
+      <p class="section-tag">[04] — stack</p>
+      <h2 class="section-title"><span class="split">My</span> <em class="split">orbit.</em></h2>
+      <div class="orbit" id="orbit">
+        <div class="orbit__core"><span>AI ×<br>Security</span></div>
+        <div class="orbit__ring r1" data-label="AI / ML">
+          <span>LLMs</span><span>RAG</span><span>AI Agents</span><span>Embeddings</span><span>Local LLMs</span><span>MediaPipe</span>
+        </div>
+        <div class="orbit__ring r2" data-label="Security">
+          <span>AI Security</span><span>Prompt Injection</span><span>Vuln Analysis</span><span>Phishing Detection</span>
+        </div>
+        <div class="orbit__ring r3" data-label="Build">
+          <span>Python</span><span>TypeScript</span><span>Next.js</span><span>PostgreSQL</span><span>pgvector</span><span>Prisma</span><span>FastAPI</span><span>SQL</span>
+        </div>
+      </div>
+      <div class="legend"><span class="l1">AI / ML</span><span class="l2">Security</span><span class="l3">Build</span></div>
+    </section>
+
+    <!-- ============ TERMINAL ============ -->
+    <section class="term-section" id="terminal">
+      <p class="section-tag">[05] — interactive</p>
+      <h2 class="section-title"><span class="split">Talk to my</span> <em class="split">terminal.</em></h2>
+      <div class="terminal" id="term" data-cursor="type">
+        <div class="terminal__bar"><i></i><i></i><i></i><span>vansh@portfolio: ~</span></div>
+        <div class="terminal__body" id="termBody">
+          <div class="terminal__out" id="termOut"></div>
+          <form class="terminal__line" id="termForm" autocomplete="off">
+            <label for="termIn"><b>vansh@portfolio</b>:<i>~</i>$</label>
+            <input id="termIn" spellcheck="false" aria-label="Terminal command" placeholder="type help and press enter">
+          </form>
+        </div>
+      </div>
+      <div class="term-quick">
+        <button data-cmd="whoami">whoami</button><button data-cmd="projects">projects</button><button data-cmd="skills">skills</button><button data-cmd="certs">certs</button><button data-cmd="contact">contact</button><button data-cmd="sudo hire vansh">sudo hire vansh</button>
+      </div>
+    </section>
+
+    <!-- ============ CERTIFICATIONS ============ -->
+    <section class="certs" id="certs">
+      <p class="section-tag">[06] — certifications</p>
+      <div class="certs__grid">
+        <a class="cert" href="https://cs50.harvard.edu/certificates/6d573cd9-81a6-4bbe-a956-aafd5b7ea910" target="_blank" rel="noopener" data-tilt data-cursor="verify">
+          <div class="cert__seal">CS50</div>
+          <div><h3>CS50's Introduction to Programming with Python</h3><p>Harvard University · 2026 · 9 problem sets + final project</p></div>
+          <span class="cert__go">verify ↗</span>
+        </a>
+        <div class="cert" data-tilt>
+          <div class="cert__seal cert__seal--b">PY</div>
+          <div><h3>Introduction to Python</h3><p>Centri · Nov 2026 · incl. a network port scanner project</p></div>
+          <span class="cert__go">ID 683690742</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact" id="contact">
+      <p class="section-tag">[07] — contact</p>
+      <h2 class="contact__big"><span>Let's build</span><span><em>something</em></span><span>secure.</span></h2>
+      <a class="contact__mail" href="mailto:vanshmahajan1601@gmail.com" data-magnetic data-cursor="email">vanshmahajan1601@gmail.com</a>
+      <div class="contact__socials">
+        <a href="https://www.linkedin.com/in/vansh-mahajan-80b88a33b/" target="_blank" rel="noopener" data-magnetic>LinkedIn ↗</a>
+        <a href="https://github.com/vansh-mahajan1" target="_blank" rel="noopener" data-magnetic>GitHub ↗</a>
+        <a href="https://testflight.apple.com/join/acPB4Sex" target="_blank" rel="noopener" data-magnetic>EachSwipe beta ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year">2026</span> Vansh Mahajan</span>
+    <span class="footer__clock">Delhi, India · <b id="clock">--:--</b> IST</span>
+    <span>Built from scratch — WebGL, GSAP &amp; a lot of curiosity.</span>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
