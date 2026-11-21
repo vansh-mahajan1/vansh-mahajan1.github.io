@@ -70,16 +70,132 @@
   $("#bootSkip").addEventListener("click", finishBoot);
   addEventListener("keydown", (e) => { if (!booted && (e.key === "Enter" || e.key === "Escape")) finishBoot(); });
 
-  /* ---------------- hero intro ---------------- */
+  /* ---------------- hero ---------------- */
   const roles = ["LLM apps", "RAG systems", "AI agents", "secure AI", "security tools", "things that ship"];
+
+  /* ---------------- holographic HUD ---------------- */
+  function initHud() {
+    const hero = $("#hero"), cv = $("#hud"), box = $("#heroName");
+    if (!cv || !box) return;
+    const ctx = cv.getContext("2d");
+    const DPR = Math.min(devicePixelRatio || 1, 2);
+    const TAU = Math.PI * 2;
+    let W = 0, H = 0, cx = 0, cy = 0, R = 0, visible = true;
+    const t0 = performance.now();
+    function size() {
+      const hb = hero.getBoundingClientRect(), bb = box.getBoundingClientRect();
+      W = hb.width; H = hb.height;
+      cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      cx = bb.left - hb.left + bb.width / 2; cy = bb.top - hb.top + bb.height / 2;
+      R = Math.min(H * .38, W * .46, 400);
+    }
+    const isLight = () => document.documentElement.dataset.theme === "light";
+    let rgb = "90,220,255";
+    const col = (a) => `rgba(${rgb},${a})`;
+    const ease = (x) => 1 - Math.pow(1 - Math.min(1, Math.max(0, x)), 3);
+    function ring(r, a0, a1, w, a) { ctx.beginPath(); ctx.arc(cx, cy, Math.max(0, r), a0, a1); ctx.lineWidth = w; ctx.strokeStyle = col(a); ctx.stroke(); }
+    function draw(now) {
+      if (!reduce) requestAnimationFrame(draw);
+      if (!visible) return;
+      const t = (now - t0) / 1000, k = reduce ? 1 : ease(t / 2.4), light = isLight();
+      rgb = light ? "40,70,120" : "170,205,240";
+      const A = (light ? .7 : .75) * k;                       // everything stays quiet
+      ctx.clearRect(0, 0, W, H);
+      // faint core glow
+      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 1.1);
+      g.addColorStop(0, col((light ? .04 : .06) * k)); g.addColorStop(1, col(0));
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      const r = R * (.92 + .08 * k);
+      // outer tick ring — hairlines, very slow
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(t * .012);
+      ctx.strokeStyle = col(.35 * A); ctx.lineWidth = .75; ctx.beginPath();
+      for (let i = 0; i < 120; i++) {
+        const a = i / 120 * TAU, len = i % 10 === 0 ? 10 : 4;
+        ctx.moveTo(Math.cos(a) * r, Math.sin(a) * r); ctx.lineTo(Math.cos(a) * (r - len), Math.sin(a) * (r - len));
+      }
+      ctx.stroke(); ctx.restore();
+      ring(r + 10, 0, TAU, .75, .2 * A);
+      // two slow arcs
+      const a2 = -t * .05;
+      ring(r * .88, a2, a2 + 1.6, 1.2, .5 * A);
+      ring(r * .88, a2 + Math.PI, a2 + Math.PI + 1.6, 1.2, .5 * A);
+      // fine dotted ring
+      ctx.setLineDash([1, 9]); ctx.lineDashOffset = -t * 4;
+      ring(r * .76, 0, TAU, 1, .45 * A);
+      ctx.setLineDash([]); ctx.lineDashOffset = 0;
+      // soft breathing ring
+      ring(r * .64, 0, TAU, .75, (.22 + .1 * Math.sin(t * .8)) * A);
+      ring(r * .52, t * .08, t * .08 + 2.4, .9, .35 * A);
+      // four small markers
+      ctx.fillStyle = col(.5 * A);
+      for (let i = 0; i < 4; i++) {
+        const a = t * .03 + i * TAU / 4;
+        ctx.beginPath(); ctx.arc(cx + Math.cos(a) * r * .88, cy + Math.sin(a) * r * .88, 1.8, 0, TAU); ctx.fill();
+      }
+    }
+    new IntersectionObserver(([en]) => (visible = en.isIntersecting)).observe(hero);
+    let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(size, 150); });
+    size(); requestAnimationFrame(draw);
+    window.__hudRedraw = () => reduce && requestAnimationFrame(draw);
+  }
+
+  /* HUD side panels: visitor's local time */
+  function initHudPanels() {
+    const clock = $("#hudClock");
+    if (!clock) return;
+    const fmt = new Intl.DateTimeFormat(undefined, { hour: "2-digit", minute: "2-digit" });
+    const tick = () => { clock.textContent = fmt.format(new Date()); };
+    tick(); setInterval(tick, 15000);
+  }
+
+  /* greeting line + soft waveform */
+  function initVoice() {
+    const wave = $("#hudWave"), say = $("#hudSay");
+    if (!wave || !say) return;
+    const bars = Array.from({ length: 24 }, () => wave.appendChild(document.createElement("span")));
+    let speaking = false;
+    const h = new Date().getHours();
+    const greet = h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening";
+    const lines = [`${greet}, and welcome.`, "Scroll to explore my work."];
+    if (reduce) { say.textContent = lines[1]; return; }
+    (function animate() {
+      if (!document.hidden) {
+        const t = performance.now() / 1000;
+        bars.forEach((b, i) => {
+          const c = Math.abs(i - (bars.length - 1) / 2) / (bars.length / 2);
+          const amp = speaking ? (.35 + .65 * Math.abs(Math.sin(t * 9 + i * .9))) * (1 - c * .8) : .12 + .05 * Math.sin(t * 1.6 + i * .5);
+          b.style.height = (2 + amp * 14).toFixed(1) + "px";
+        });
+      }
+      setTimeout(animate, 90);
+    })();
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    (async () => {
+      await sleep(1600);
+      for (const l of lines) {
+        speaking = true; say.textContent = "";
+        for (const ch of l) { say.textContent += ch; await sleep(ch === " " ? 30 : 45); }
+        speaking = false;
+        if (l !== lines[lines.length - 1]) await sleep(2200);
+      }
+    })();
+  }
+
   function startHero() {
-    $$("[data-decode]").forEach((el, i) => setTimeout(() => scramble(el, el.dataset.decode, 900), i * 180));
+    initHud(); initHudPanels(); initVoice();
+    // split the name into letters inside clip boxes for a clean rise-in
+    const name = $("#heroName");
+    $$(".hero__word", name).forEach((w) => {
+      w.innerHTML = [...w.textContent].map((c) => `<span class="hero__clip" aria-hidden="true"><span class="hero__ch">${c}</span></span>`).join("");
+    });
     if (hasGSAP && !reduce) {
-      gsap.from(".hero__name .word", { yPercent: 110, duration: 1.1, ease: "expo.out", stagger: .12 });
-      gsap.from(".reveal-up", { y: 30, opacity: 0, duration: 1, ease: "power3.out", stagger: .1, delay: .3 });
-      gsap.from(".core", { scale: .7, opacity: 0, rotate: -8, duration: 1.4, ease: "expo.out", delay: .2 });
-      gsap.from(".core__chip", { scale: 0, opacity: 0, duration: .8, ease: "back.out(2)", stagger: .12, delay: .9 });
+      gsap.from(".hero__ch", { yPercent: 115, duration: 1.1, ease: "expo.out", stagger: .045, delay: .35 });
+      gsap.from([".hero__eyebrow", ".hud-voice", ".hero__tags", ".hero__role", ".hero__cta .btn"],
+        { y: 24, opacity: 0, duration: .9, ease: "power3.out", stagger: .08, delay: .9 });
       gsap.from(".nav", { y: -80, opacity: 0, duration: 1, ease: "expo.out", delay: .1 });
+      gsap.from(".hud-panel--l", { x: -40, opacity: 0, duration: 1, ease: "expo.out", delay: 1.5 });
+      gsap.from(".hud-panel--r", { x: 40, opacity: 0, duration: 1, ease: "expo.out", delay: 1.6 });
+      gsap.from(".hud-frame i", { opacity: 0, duration: 1.2, ease: "power2.out", stagger: .08, delay: .6 });
     }
     let r = 0;
     const rot = $("#rotator");
@@ -304,6 +420,7 @@
     toggle.setAttribute("aria-label", t === "light" ? "Switch to dark mode" : "Switch to light mode");
     metaTheme.setAttribute("content", t === "light" ? "#f6f4ef" : "#000000");
     readTheme();
+    window.__hudRedraw && window.__hudRedraw();
     if (reduce) { arts.forEach((cv) => drawArt(cv, 1)); window.__redrawAurora && window.__redrawAurora(); }
   }
   toggle.setAttribute("aria-label", document.documentElement.dataset.theme === "light" ? "Switch to dark mode" : "Switch to light mode");

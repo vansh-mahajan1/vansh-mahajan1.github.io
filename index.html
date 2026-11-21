@@ -65,31 +65,41 @@
   </header>
 
   <main id="top">
-    <!-- ============ HERO ============ -->
+    <!-- ============ HERO: name + quiet HUD rings ============ -->
     <section class="hero" id="hero">
       <div class="hero__grid" aria-hidden="true"></div>
-      <div class="hero__left">
-        <p class="eyebrow reveal-up"><span class="dot"></span> CS @ IILM University · Ex-AI Intern @ LeewayHertz</p>
-        <h1 class="hero__name">
-          <span class="line"><span class="word" data-decode="Vansh">Vansh</span></span>
-          <span class="line"><span class="word word--outline" data-decode="Mahajan">Mahajan</span></span>
-        </h1>
-        <p class="hero__role">I build <span class="rotator" id="rotator">LLM apps</span><span class="caret">_</span></p>
-        <p class="hero__lede reveal-up">Second-year Computer Science student working where <em>AI/ML</em> meets <em>cybersecurity</em> — building LLM-powered systems and figuring out how to make them secure.</p>
-        <div class="hero__cta reveal-up">
-          <a href="#projects" class="btn btn--primary" data-magnetic data-cursor="view"><span>See my work</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a href="#terminal" class="btn btn--ghost" data-magnetic data-cursor="type"><span>Open terminal</span><code>&gt;_</code></a>
-        </div>
+      <canvas class="hero__hud" id="hud" aria-hidden="true"></canvas>
+      <div class="hud-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <aside class="hud-panel hud-panel--l" aria-hidden="true">
+        <h6>Profile</h6>
+        <dl>
+          <div><dt>Discipline</dt><dd>AI/ML &amp; Security</dd></div>
+          <div><dt>University</dt><dd>IILM University</dd></div>
+          <div><dt>Experience</dt><dd>AI Intern, LeewayHertz</dd></div>
+          <div><dt>Availability</dt><dd class="ok">Open to opportunities</dd></div>
+          <div><dt>Your local time</dt><dd id="hudClock">--:--</dd></div>
+        </dl>
+      </aside>
+      <aside class="hud-panel hud-panel--r" aria-hidden="true">
+        <h6>Current focus</h6>
+        <ol class="hud-focus">
+          <li><span>01</span>Large language models</li>
+          <li><span>02</span>Retrieval-augmented generation</li>
+          <li><span>03</span>AI agents</li>
+          <li><span>04</span>AI security &amp; prompt injection</li>
+        </ol>
+      </aside>
+      <p class="hero__eyebrow"><span class="dot"></span> CS @ IILM University · ex-AI Intern @ LeewayHertz</p>
+      <div class="hud-voice">
+        <div class="hud-wave" id="hudWave" aria-hidden="true"></div>
+        <p class="hud-say" aria-live="polite"><span id="hudSay"></span><span class="caret">_</span></p>
       </div>
-      <div class="hero__right">
-        <div class="core" data-tilt aria-hidden="true">
-          <div class="core__ring"></div>
-          <div class="core__blob"><canvas id="globe"></canvas></div>
-          <div class="core__chip chip-a">🧠 LLMs &amp; RAG</div>
-          <div class="core__chip chip-b">🛡️ AI Security</div>
-          <div class="core__chip chip-c">⚡ Python</div>
-          <svg class="core__orbit" viewBox="0 0 400 400"><circle cx="200" cy="200" r="190"/></svg>
-        </div>
+      <h1 class="hero__name" id="heroName" aria-label="Vansh Mahajan"><span class="hero__word">Vansh</span> <span class="hero__word">Mahajan</span></h1>
+      <p class="hero__tags"><span>AI/ML</span><i>×</i><span>Cyber Security</span><i>×</i><span>AI Security</span></p>
+      <p class="hero__role">I build <span class="rotator" id="rotator">LLM apps</span><span class="caret">_</span></p>
+      <div class="hero__cta">
+        <a href="#projects" class="btn btn--primary" data-magnetic data-cursor="view"><span>See my work</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#terminal" class="btn btn--ghost" data-magnetic data-cursor="type"><span>Open terminal</span><code>&gt;_</code></a>
       </div>
       <a href="#about" class="hero__scroll" aria-label="Scroll down"><span>scroll</span><i></i></a>
     </section>
